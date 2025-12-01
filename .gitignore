@@ -1,0 +1,25 @@
+# ==================== Developer Kit Git Ignore ====================
+
+# ==================== OS ====================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==================== IDE ====================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ==================== 임시 파일 ====================
+*.log
+*.tmp
+*.bak
+
+# ==================== 클론된 저장소 (Dev Kit 외부) ====================
+# Dev Kit 외부의 저장소들은 무시
+../stock-predictor-backend/
+../stock-predictor-frontend/
+../development-rules/
+
