@@ -206,6 +206,58 @@ npm install
 
 ---
 
+## 🔧 디버그 도구
+
+### 1️⃣ Import 검증 (백엔드)
+
+백엔드 모듈의 import 오류를 검사합니다:
+
+```bash
+cd stock-predictor-backend
+python ../stock-predictor-dev-kit/tools/debug-imports.py
+```
+
+**검사 항목:**
+- 존재하지 않는 모듈 import
+- 잘못된 클래스/함수명
+- 순환 import
+
+### 2️⃣ API 테스트
+
+API 엔드포인트를 테스트합니다:
+
+```bash
+# 로컬 테스트
+python tools/debug-api.py
+
+# 배포된 서버 테스트
+python tools/debug-api.py https://your-backend.up.railway.app
+```
+
+### 3️⃣ 스토리지 디버그 (프론트엔드)
+
+브라우저 콘솔에서 LocalStorage를 디버깅합니다:
+
+1. F12 → Console 탭 열기
+2. `tools/debug-storage.js` 내용 붙여넣기
+3. 또는 내장된 디버그 도구 사용:
+
+```javascript
+// 전체 스토리지 조회
+window.__storageDebug.viewAll()
+
+// 스토리지 사용량
+window.__storageDebug.usage()
+
+// 포트폴리오 상세 조회
+StorageDebug.viewPortfolio()
+
+// 데이터 백업
+StorageDebug.backup()
+```
+
+---
+
 ## 🚀 배포
 
 ### Backend (Railway)
