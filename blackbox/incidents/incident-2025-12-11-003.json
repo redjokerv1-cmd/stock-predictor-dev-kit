@@ -1,0 +1,47 @@
+{
+  "id": "incident-2025-12-11-003",
+  "severity": "medium",
+  "title": "하드코딩된 포트폴리오 값과 DatePicker 타입 에러",
+  "date": "2025-12-11",
+  "symptom": "TypeError: date$1.isValid is not a function",
+  "context": "포트폴리오 수정 버튼(연필 아이콘) 클릭 시 에러 발생",
+  "root_cause": [
+    {
+      "issue": "DatePicker에 문자열 전달",
+      "file": "AddStockModal.tsx",
+      "wrong": "buyDate: initialData.buyDate as any",
+      "correct": "buyDate: initialData.buyDate ? dayjs(initialData.buyDate) as any : undefined",
+      "explanation": "antd DatePicker는 dayjs 객체를 기대하는데, 문자열을 전달하여 isValid() 메서드 없음 에러"
+    },
+    {
+      "issue": "사이드바 포트폴리오 값 하드코딩",
+      "file": "Sidebar.tsx",
+      "wrong": "₩0, ↑ 0.0%",
+      "correct": "실제 포트폴리오 데이터 로드",
+      "explanation": "UI 개발 중 임시 값을 넣고 실제 데이터 연동을 잊음"
+    }
+  ],
+  "solution": {
+    "files_fixed": [
+      "src/components/Portfolio/AddStockModal.tsx",
+      "src/components/Layout/Sidebar.tsx"
+    ],
+    "commit": "f620cd4"
+  },
+  "why_missed_in_review": [
+    "Sidebar.tsx가 검수 대상에서 누락",
+    "하드코딩된 통화 문자열(₩0) 패턴 검색 안함",
+    "as any로 타입 에러 숨긴 부분 재검토 안함"
+  ],
+  "prevention": {
+    "checks_to_add": [
+      "grep -r '₩0|\\$0|0\\.0%' src/components",
+      "grep -r 'as any' src/ | wc -l (추적)"
+    ],
+    "rule": "임시 UI 값은 반드시 TODO 주석 추가",
+    "pattern": "// TODO: 실제 데이터 연동 필요"
+  },
+  "resolution_time_minutes": 20,
+  "timestamp": "2025-12-11T08:30:00Z"
+}
+
