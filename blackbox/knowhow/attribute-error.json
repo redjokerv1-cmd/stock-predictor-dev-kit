@@ -1,0 +1,55 @@
+{
+  "category": "AttributeError",
+  "description": "객체에 존재하지 않는 속성/메서드 접근 시 발생",
+  "patterns": [
+    {
+      "id": "attr-001",
+      "symptom": "'X' object has no attribute 'Y'",
+      "causes": [
+        "메서드명 오타",
+        "다른 버전의 API 사용",
+        "import 시 클래스/인스턴스 혼동"
+      ],
+      "diagnosis_steps": [
+        "1. 해당 클래스 파일 열기",
+        "2. grep 'def ' <파일> | head -30 으로 메서드 목록 확인",
+        "3. 올바른 메서드명으로 수정"
+      ],
+      "example": {
+        "error": "'SentimentAggregator' object has no attribute 'aggregate'",
+        "wrong": "self.aggregator.aggregate(data)",
+        "correct": "self.aggregator.aggregate_sentiments(news_items=..., ...)",
+        "file": "modules/sentiment_analyzer.py"
+      },
+      "prevention": "새 클래스 사용 전 해당 파일에서 메서드 시그니처 확인"
+    },
+    {
+      "id": "attr-002",
+      "symptom": "'NoneType' object has no attribute 'X'",
+      "causes": [
+        "함수가 None 반환",
+        "변수 초기화 안됨",
+        "조건부 할당 실패"
+      ],
+      "diagnosis_steps": [
+        "1. 해당 변수가 어디서 할당되는지 확인",
+        "2. 반환값이 None일 수 있는 함수인지 확인",
+        "3. None 체크 추가"
+      ],
+      "example": {
+        "error": "'NoneType' object has no attribute 'items'",
+        "wrong": "for item in data.items:",
+        "correct": "for item in (data.items if data else []):",
+        "file": "various"
+      },
+      "prevention": "Optional 타입 사용 시 항상 None 체크"
+    }
+  ],
+  "quick_fix_commands": [
+    "grep 'def ' <module_file>.py | head -30",
+    "grep 'class ' <module_file>.py"
+  ],
+  "related_rules": ["GEN-004", "LIB-001"],
+  "updated": "2025-12-11"
+}
+

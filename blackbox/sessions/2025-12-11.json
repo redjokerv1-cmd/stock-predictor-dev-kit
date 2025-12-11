@@ -1,0 +1,96 @@
+{
+  "id": "session-2025-12-11",
+  "date": "2025-12-11",
+  "summary": "버그 수정 및 디버그 도구 구축",
+  "tasks_completed": [
+    {
+      "title": "센티멘트 분석기 모듈 import 오류 수정",
+      "description": "존재하지 않는 모듈(naver_news, reddit_client, YouTubeAnalyzer) import를 올바른 모듈로 수정",
+      "files": ["backend/modules/sentiment_analyzer.py"],
+      "related_incident": "incident-2025-12-11-001"
+    },
+    {
+      "title": "create_prediction_result 인자 불일치 수정",
+      "description": "7개 필수 인자 전달 누락 수정",
+      "files": ["backend/modules/sentiment_analyzer.py"]
+    },
+    {
+      "title": "포트폴리오 데이터 손실 버그 수정",
+      "description": "검증 실패 시 raw 데이터 복구 로직 추가",
+      "files": ["frontend/src/utils/storage/adapters/portfolio-adapter.ts"],
+      "related_incident": "incident-2025-12-11-002"
+    },
+    {
+      "title": "최근검색 선택 안되는 버그 수정",
+      "description": "searchResults에 없을 때 fallback StockSearchResult 생성",
+      "files": ["frontend/src/components/Search/StockSearch.tsx"]
+    },
+    {
+      "title": "AIReportModal 캐싱 설정 개선",
+      "description": "staleTime 0 → 5분 (프로덕션용)",
+      "files": ["frontend/src/components/AI/AIReportModal.tsx"]
+    },
+    {
+      "title": "센티멘트 수집 병렬 처리 + 타임아웃",
+      "description": "ThreadPoolExecutor로 병렬 처리, 10초 타임아웃 추가",
+      "files": ["backend/modules/sentiment_analyzer.py"]
+    },
+    {
+      "title": "Dev Kit 디버그 도구 추가",
+      "description": "debug-imports.py, debug-api.py, debug-storage.js, full-check.py",
+      "files": [
+        "dev-kit/tools/debug-imports.py",
+        "dev-kit/tools/debug-api.py",
+        "dev-kit/tools/debug-storage.js",
+        "dev-kit/tools/full-check.py"
+      ]
+    },
+    {
+      "title": "AI Blackbox 시스템 구축",
+      "description": "incidents/, sessions/, decisions/ 구조로 AI 참조용 기록 시스템 생성",
+      "files": [
+        "dev-kit/blackbox/README.md",
+        "dev-kit/blackbox/incidents/",
+        "dev-kit/blackbox/sessions/"
+      ]
+    }
+  ],
+  "commits": [
+    {"hash": "24f2f82", "repo": "backend", "message": "fix: use correct SentimentAggregator method name"},
+    {"hash": "2662cc4", "repo": "backend", "message": "fix: sentiment analyzer module import errors"},
+    {"hash": "10f1527", "repo": "backend", "message": "perf: add parallel processing + timeout for sentiment collection"},
+    {"hash": "5450309", "repo": "frontend", "message": "fix: improve portfolio data recovery logic"},
+    {"hash": "4db253e", "repo": "frontend", "message": "fix: recent search selection from portfolio modal"},
+    {"hash": "1a03d39", "repo": "frontend", "message": "perf: optimize caching and bundle warnings"},
+    {"hash": "0c609d2", "repo": "frontend", "message": "fix: prevent portfolio data loss on validation failure"},
+    {"hash": "cc8fd40", "repo": "dev-kit", "message": "feat: add debug tools for import validation, API testing, and storage"}
+  ],
+  "issues_encountered": [
+    "incident-2025-12-11-001",
+    "incident-2025-12-11-002"
+  ],
+  "patterns_discovered": [
+    {
+      "pattern": "존재하지 않는 모듈 import",
+      "cause": "코드 복사 시 모듈명 확인 안함",
+      "prevention": "debug-imports.py로 사전 검증"
+    },
+    {
+      "pattern": "검증 실패 → 데이터 손실",
+      "cause": "검증 실패 시 빈 객체 반환 후 저장",
+      "prevention": "복구 시도 또는 에러 throw"
+    }
+  ],
+  "tools_created": [
+    "debug-imports.py - 백엔드 import 검증",
+    "debug-api.py - API 엔드포인트 테스트",
+    "debug-storage.js - 브라우저 LocalStorage 디버그",
+    "full-check.py - 종합 시스템 검사"
+  ],
+  "next_steps": [
+    "blackbox 시스템 활용하여 문제 추적 개선",
+    "full-check.py 배포 전 자동 실행 설정"
+  ],
+  "timestamp": "2025-12-11T08:00:00Z"
+}
+

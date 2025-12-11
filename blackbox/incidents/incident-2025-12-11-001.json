@@ -1,0 +1,27 @@
+{
+  "id": "incident-2025-12-11-001",
+  "severity": "critical",
+  "title": "SentimentAggregator.aggregate 메서드 없음",
+  "date": "2025-12-11",
+  "symptom": "'SentimentAggregator' object has no attribute 'aggregate'",
+  "error_log": "[센티멘트] 000660.KS 분석 오류: 'SentimentAggregator' object has no attribute 'aggregate'",
+  "root_cause": {
+    "description": "sentiment_analyzer.py에서 SentimentAggregator의 메서드를 잘못된 이름으로 호출",
+    "wrong_code": "result = self.aggregator.aggregate(sentiment_data)",
+    "correct_code": "result = self.aggregator.aggregate_sentiments(news_items=..., community_posts=..., expert_videos=...)"
+  },
+  "solution": {
+    "description": "올바른 메서드명(aggregate_sentiments)으로 수정하고 인자 형식 맞춤",
+    "files_fixed": ["backend/modules/sentiment_analyzer.py"],
+    "commit": "24f2f82"
+  },
+  "prevention": {
+    "rule": "새 모듈/클래스 사용 시 반드시 해당 파일에서 메서드명 확인",
+    "check_command": "grep 'def ' utils/sentiment_aggregator.py | head -20",
+    "related_rules": ["GEN-004", "LIB-001"]
+  },
+  "detection_method": "Railway 로그에서 에러 발견",
+  "resolution_time_minutes": 15,
+  "timestamp": "2025-12-11T07:30:00Z"
+}
+

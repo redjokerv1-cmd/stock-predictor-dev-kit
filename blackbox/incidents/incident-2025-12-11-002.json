@@ -1,0 +1,37 @@
+{
+  "id": "incident-2025-12-11-002",
+  "severity": "high",
+  "title": "포트폴리오 데이터 검증 실패 시 데이터 손실",
+  "date": "2025-12-11",
+  "symptom": "포트폴리오에 종목 추가 시 모든 기존 데이터 삭제됨",
+  "user_report": "나 포트폴리오에서 종목 추가했는데 갑자기 모든 포트폴리오 데이터가 지워졌어",
+  "root_cause": {
+    "description": "loadPortfolio()에서 검증 실패 시 빈 포트폴리오를 반환하고, 이후 savePortfolio() 호출 시 빈 데이터가 저장됨",
+    "problematic_flow": [
+      "1. loadPortfolio() 호출",
+      "2. isValidPortfolio() 검증 실패 (일부 필드 누락 등)",
+      "3. createEmptyPortfolio() 반환",
+      "4. 새 아이템 추가",
+      "5. savePortfolio() 호출 → 빈 포트폴리오 + 새 아이템만 저장",
+      "6. 기존 데이터 손실"
+    ]
+  },
+  "solution": {
+    "description": "검증 실패해도 raw 데이터 파싱으로 복구 시도",
+    "approach": "localStorage에서 직접 읽어 최소한의 구조만 확인 후 반환",
+    "files_fixed": ["frontend/src/utils/storage/adapters/portfolio-adapter.ts"],
+    "commit": "5450309"
+  },
+  "prevention": {
+    "rule": "검증 실패 시 빈 데이터 반환하지 말고 복구 시도 또는 에러 throw",
+    "pattern": "Graceful Degradation with Data Recovery",
+    "test_case": "검증 실패 데이터로 loadPortfolio() 테스트 추가"
+  },
+  "impact": {
+    "data_lost": "사용자 포트폴리오 전체",
+    "recoverable": false
+  },
+  "resolution_time_minutes": 30,
+  "timestamp": "2025-12-11T07:17:00Z"
+}
+
