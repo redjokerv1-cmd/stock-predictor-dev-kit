@@ -1,0 +1,55 @@
+{
+  "id": "incident-2025-12-12-001",
+  "severity": "medium",
+  "title": "로그 파일 한글 깨짐 (UTF-8 인코딩 미적용)",
+  "date": "2025-12-12",
+  "symptom": "로그 파일에서 한글이 깨져 보임 (?듯빀, 珥덇린?? 등)",
+  "user_report": "로그 파일 부분도 한글 깨져 보이는거 원인분석하고 앞으로 깨져보이지 않게 철저하게 관리해",
+  "root_cause": {
+    "description": "여러 모듈이 독자적인 로거를 생성하면서 StreamHandler에 UTF-8 인코딩 미설정",
+    "problematic_files": [
+      "utils/gemini_analyzer.py",
+      "utils/youtube_client.py",
+      "utils/alert_scheduler.py",
+      "utils/alert_manager.py",
+      "utils/sentiment_aggregator.py",
+      "utils/transcript_analyzer.py"
+    ],
+    "problematic_code": "handler = logging.StreamHandler()  # 인코딩 없음",
+    "correct_code": "handler = get_utf8_stream_handler('ModuleName')  # UTF-8 강제"
+  },
+  "solution": {
+    "approach": "5단계 전방위 해결",
+    "steps": [
+      "1. 근본 원인 분석: 로거 파편화 + UTF-8 미설정",
+      "2. grep으로 같은 패턴 모두 검색",
+      "3. utils/logger.py에 get_utf8_stream_handler() 팩토리 함수 추가",
+      "4. Root Logger 레벨에서 UTF-8 초기화",
+      "5. 모든 독자 로거 파일 수정",
+      "6. GEN-006 규칙 문서화"
+    ],
+    "files_fixed": [
+      "utils/logger.py",
+      "utils/gemini_analyzer.py",
+      "utils/youtube_client.py",
+      "utils/alert_scheduler.py",
+      "utils/alert_manager.py",
+      "utils/sentiment_aggregator.py",
+      "utils/transcript_analyzer.py"
+    ],
+    "new_files": [
+      "development-rules/rules/general/GEN-006-utf8-encoding.md"
+    ]
+  },
+  "prevention": {
+    "rule": "GEN-006-utf8-encoding",
+    "checks": [
+      "grep -rn 'StreamHandler()' --include='*.py' | grep -v 'get_utf8_stream_handler'",
+      "grep -rn 'open(' --include='*.py' | grep -v 'encoding='"
+    ],
+    "template": "새 모듈 작성 시 get_utf8_stream_handler() 사용"
+  },
+  "resolution_time_minutes": 25,
+  "timestamp": "2025-12-12T15:30:00Z"
+}
+
