@@ -405,7 +405,7 @@ No data found, symbol may be delisted
 # 저장소 삭제
 rm -rf stock-predictor-backend
 rm -rf stock-predictor-frontend
-rm -rf development-rules
+rm -rf universal-devkit
 
 # Dev Kit에서 setup 재실행
 cd stock-predictor-dev-kit
@@ -418,7 +418,7 @@ cd stock-predictor-dev-kit
 
 - **문서**: [docs/](../)
 - **API 가이드**: [API_KEYS_GUIDE.md](API_KEYS_GUIDE.md)
-- **개발 규칙**: https://github.com/redjokerv1-cmd/development-rules
+- **개발 규칙**: https://github.com/redjokerv1-cmd/universal-devkit
 
 **해결되지 않은 문제:**
 - GitHub Issue 생성: https://github.com/redjokerv1-cmd/stock-predictor-dev-kit/issues

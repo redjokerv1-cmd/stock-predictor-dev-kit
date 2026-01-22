@@ -44,7 +44,7 @@ chmod +x scripts/setup.sh
 
 **자동으로 수행되는 작업:**
 - ✅ Backend/Frontend 저장소 자동 클론
-- ✅ Development Rules 저장소 클론
+- ✅ Universal DevKit 저장소 클론
 - ✅ 환경 변수 템플릿 복사 (.env 생성)
 - ✅ Python 가상 환경 생성
 - ✅ Backend 의존성 설치 (pip install)
@@ -147,7 +147,7 @@ git --version     # 최신
 - [상세 설정 가이드](docs/SETUP_GUIDE.md) - 수동 설정 방법
 - [프로젝트 구조](docs/ARCHITECTURE.md) - 전체 아키텍처 설명
 - [문제 해결](docs/TROUBLESHOOTING.md) - 흔한 에러 해결 방법
-- [개발 규칙](https://github.com/redjokerv1-cmd/development-rules) - 코딩 가이드라인
+- [개발 규칙](https://github.com/redjokerv1-cmd/universal-devkit) - 코딩 가이드라인
 
 ---
 
@@ -160,7 +160,7 @@ git --version     # 최신
 ```bash
 git clone git@github.com:redjokerv1-cmd/stock-predictor-backend.git
 git clone git@github.com:redjokerv1-cmd/stock-predictor-frontend.git
-git clone git@github.com:redjokerv1-cmd/development-rules.git
+git clone git@github.com:redjokerv1-cmd/universal-devkit.git
 ```
 
 ### 2. 환경 변수 설정
@@ -301,7 +301,7 @@ git push origin main
 
 1. Issue 생성
 2. Pull Request 제출
-3. [Development Rules](https://github.com/redjokerv1-cmd/development-rules) 준수
+3. [Universal DevKit](https://github.com/redjokerv1-cmd/universal-devkit) 준수
 
 ---
 
@@ -309,7 +309,7 @@ git push origin main
 
 - **문서**: [docs/](docs/)
 - **문제 해결**: [TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
-- **개발 규칙**: https://github.com/redjokerv1-cmd/development-rules
+- **개발 규칙**: https://github.com/redjokerv1-cmd/universal-devkit
 
 ---
 

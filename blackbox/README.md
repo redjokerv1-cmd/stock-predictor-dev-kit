@@ -137,6 +137,6 @@ blackbox/
 ## ⚠️ 주의사항
 
 - 이 폴더의 JSON 파일은 **AI가 읽기 위한 용도**입니다
-- 사람이 읽을 문서는 `development-rules/reflections/` 또는 `development-rules/case-studies/` 사용
+- 사람이 읽을 문서는 `universal-devkit/reflections/` 또는 `universal-devkit/case-studies/` 사용
 - 민감 정보 (API 키, 비밀번호) 절대 기록 금지
 

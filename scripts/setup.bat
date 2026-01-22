@@ -37,12 +37,12 @@ if not exist "stock-predictor-frontend" (
     echo ⚠️ Frontend 이미 존재 (스킵)
 )
 
-if not exist "development-rules" (
-    echo 🔹 Development Rules 클론 중...
-    git clone git@github.com:redjokerv1-cmd/development-rules.git
-    echo ✅ Development Rules 클론 완료
+if not exist "universal-devkit" (
+    echo 🔹 Universal DevKit 클론 중...
+    git clone git@github.com:redjokerv1-cmd/universal-devkit.git
+    echo ✅ Universal DevKit 클론 완료
 ) else (
-    echo ⚠️ Development Rules 이미 존재 (스킵)
+    echo ⚠️ Universal DevKit 이미 존재 (스킵)
 )
 
 echo.

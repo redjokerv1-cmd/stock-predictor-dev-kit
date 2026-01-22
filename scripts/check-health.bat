@@ -82,11 +82,11 @@ if exist "..\stock-predictor-frontend" (
     echo ❌ Frontend 저장소 없음 (setup.bat 실행 필요)
 )
 
-REM Development Rules 확인
-if exist "..\development-rules" (
-    echo ✅ Development Rules 저장소 존재
+REM Universal DevKit 확인
+if exist "..\universal-devkit" (
+    echo ✅ Universal DevKit 저장소 존재
 ) else (
-    echo ⚠️ Development Rules 저장소 없음 (선택 사항)
+    echo ⚠️ Universal DevKit 저장소 없음 (선택 사항)
 )
 
 echo.
