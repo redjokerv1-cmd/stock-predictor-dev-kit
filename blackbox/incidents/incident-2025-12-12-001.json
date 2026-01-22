@@ -38,7 +38,7 @@
       "utils/transcript_analyzer.py"
     ],
     "new_files": [
-      "development-rules/rules/general/GEN-006-utf8-encoding.md"
+      "universal-devkit/rules/general/GEN-006-utf8-encoding.md"
     ]
   },
   "prevention": {
