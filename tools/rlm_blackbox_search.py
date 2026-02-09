@@ -52,7 +52,7 @@ class RLMBlackboxSearch:
         """Blackbox 경로 자동 탐지"""
         possible_paths = [
             Path(__file__).parent.parent / "blackbox",
-            Path("G:/Study/AI/stock-predictor-dev-kit/blackbox"),
+            Path("F:/AI/projects-hub/stock-predictor-dev-kit/blackbox"),
             Path.cwd() / "blackbox",
         ]
         
